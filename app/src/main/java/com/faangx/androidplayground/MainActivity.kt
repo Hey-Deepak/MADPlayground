@@ -22,14 +22,6 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val packageManager: PackageManager = getPackageManager()
-
-        packageManager.setComponentEnabledSetting(
-            ComponentName(this@MainActivity , "com.faangx.androidplayground.MainActivityAlias"),
-            PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
-            PackageManager.DONT_KILL_APP
-        )
-
         setContent {
             AndroidPlaygroundTheme {
                 // A surface container using the 'background' color from the theme
@@ -43,24 +35,7 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier.fillMaxSize()
                     ) {
 
-                        Button(onClick = {
 
-                            //val packageManager: PackageManager = getPackageManager()
-
-                            packageManager.setComponentEnabledSetting(
-                                ComponentName(this@MainActivity, "com.faangx.androidplayground.MainActivity"),
-                                PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
-                                PackageManager.DONT_KILL_APP
-                            )
-                            packageManager.setComponentEnabledSetting(
-                                ComponentName(this@MainActivity , "com.faangx.androidplayground.MainActivityAlias"),
-                                PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
-                                PackageManager.DONT_KILL_APP
-                            )
-
-                        }) {
-                            Text(text = "Change Icon")
-                        }
 
                     }
                 }
