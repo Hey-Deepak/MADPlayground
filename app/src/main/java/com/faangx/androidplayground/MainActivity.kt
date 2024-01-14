@@ -3,8 +3,11 @@ package com.faangx.androidplayground
 import android.content.ComponentName
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -22,6 +25,16 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        val pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+            // Callback is invoked after the user selects a media item or closes the
+            // photo picker.
+            if (uri != null) {
+                Log.d("PhotoPicker", "Selected URI: $uri")
+            } else {
+                Log.d("PhotoPicker", "No media selected")
+            }
+        }
+
         setContent {
             AndroidPlaygroundTheme {
                 // A surface container using the 'background' color from the theme
@@ -29,15 +42,9 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.Center,
-                        modifier = Modifier.fillMaxSize()
-                    ) {
-
-
-
-                    }
+                    ImagePickerScreen(
+                        pickMedia
+                    )
                 }
             }
         }
